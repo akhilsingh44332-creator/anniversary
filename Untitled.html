@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Anniversary Celebration</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+/* BODY */
+body{
+min-height:100vh;
+font-family:'Cinzel', serif;
+background-image:url("https://www.transparenttextures.com/patterns/marble.png");
+background-attachment:fixed;
+background-color:white;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+padding:60px 0;
+overflow-x:hidden;
+}
+
+/* CURTAINS */
+.curtain{
+position:fixed;
+top:0;
+width:50%;
+height:100%;
+background:linear-gradient(90deg,#7a0000,#b30000);
+z-index:9999;
+transition:2.5s ease;
+}
+.left{left:0;}
+.right{right:0;}
+.open .left{transform:translateX(-100%);}
+.open .right{transform:translateX(100%);}
+
+/* CARD */
+.card{
+width:900px;
+max-width:92%;
+background:white;
+padding:80px 60px;
+text-align:center;
+border-radius:10px;
+position:relative;
+box-shadow:0 25px 70px rgba(0,0,0,0.12);
+border:1px solid rgba(0,0,0,0.05);
+}
+
+/* GOLD FRAME */
+.card::before{
+content:"";
+position:absolute;
+top:15px;left:15px;right:15px;bottom:15px;
+border:3px solid #d4af37;
+border-radius:6px;
+}
+
+/* TITLE */
+h1{
+font-size:2.7rem;
+margin-bottom:25px;
+letter-spacing:2px;
+}
+
+/* 3D GOLD NAMES */
+.scene{perspective:1200px;margin:40px 0;}
+.gold3d{
+font-size:4rem;
+font-weight:700;
+letter-spacing:4px;
+display:inline-block;
+animation:rotate3d 16s infinite linear;
+position:relative;
+
+background:linear-gradient(45deg,#fff6cc,#d4af37,#b8962e,#fff6cc);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+text-shadow:
+1px 1px 0 #caa42d,
+2px 2px 0 #c39b28,
+3px 3px 0 #b89325,
+4px 4px 0 #ad8a22,
+5px 5px 0 #a1811f,
+6px 6px 0 #96771b,
+7px 7px 12px rgba(0,0,0,0.25),
+0 0 20px rgba(212,175,55,0.4);
+}
+
+/* GOLD LIGHT SWEEP */
+.gold3d::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:50%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.7),transparent);
+animation:sweep 4s infinite;
+}
+
+@keyframes sweep{
+0%{left:-100%;}
+100%{left:150%;}
+}
+
+@keyframes rotate3d{
+from{transform:rotateY(0);}
+to{transform:rotateY(360deg);}
+}
+
+/* TEXT */
+p{
+font-size:1.15rem;
+line-height:1.9;
+margin-top:25px;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+p.show{opacity:1;transform:translateY(0);}
+
+.poem{margin-top:40px;font-style:italic;color:#666;}
+
+/* SIMPLE ROSE PETALS */
+.petal{
+position:fixed;
+top:-20px;
+font-size:22px;
+pointer-events:none;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+0%{transform:translateY(-20px) rotate(0deg);}
+100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}
+
+/* GOLD SPARKLES */
+.sparkle{
+position:absolute;
+width:6px;height:6px;
+background:gold;
+border-radius:50%;
+box-shadow:0 0 10px gold,0 0 20px gold;
+animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+from{opacity:0.3;}
+to{opacity:1;}
+}
+
+/* MOBILE */
+@media(max-width:600px){
+.card{padding:50px 25px;}
+.gold3d{font-size:2.3rem;}
+h1{font-size:1.8rem;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- CURTAINS -->
+<div class="curtain left"></div>
+<div class="curtain right"></div>
+
+<div class="card">
+
+<h1>Celebrating a Lifetime of Love</h1>
+
+<div class="scene">
+<div class="gold3d">Sunita ❤️ Rudramani</div>
+</div>
+
+<p>With hearts filled with gratitude and joy, we celebrate the beautiful union of two souls whose love grows deeper with every passing year.</p>
+
+<p>Your journey together is a timeless story of devotion, patience, friendship, and endless care.</p>
+
+<p>Your love is not merely spoken — it is felt in every smile, every sacrifice, and every moment of silent understanding.</p>
+
+<p class="poem">
+Two hearts bound in graceful harmony… <br>
+A love that deepens endlessly… <br>
+Through passing years your light still shines… <br>
+Eternal… radiant… beautifully divine.
+</p>
+
+<p>May the years ahead bring even more happiness, more cherished memories, and more love than ever before.</p>
+
+<p>Happy Wedding Anniversary ❤️</p>
+
+</div>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2021/11/25/audio_c4a4a9df92.mp3">
+</audio>
+
+<script>
+
+/* CURTAIN OPEN */
+window.onload=()=>{
+setTimeout(()=>document.body.classList.add("open"),500);
+};
+
+/* SCROLL REVEAL */
+const elements=document.querySelectorAll("p");
+function reveal(){
+elements.forEach(el=>{
+if(el.getBoundingClientRect().top<window.innerHeight-80){
+el.classList.add("show");
+}
+});
+}
+window.addEventListener("scroll",reveal);
+reveal();
+
+/* ROSE PETALS */
+setInterval(()=>{
+const p=document.createElement("div");
+p.className="petal";
+p.innerHTML="🌹";
+p.style.left=Math.random()*window.innerWidth+"px";
+p.style.animationDuration=(6+Math.random()*6)+"s";
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),12000);
+},350);
+
+/* GOLD SPARKLES */
+setInterval(()=>{
+const s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*window.innerWidth+"px";
+s.style.top=Math.random()*window.innerHeight+"px";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),2000);
+},300);
+
+</script>
+
+</body>
+</html>
